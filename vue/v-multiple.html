@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <input v-model="newTodo" v-on:keyup.enter="addTodo" />
+        <ul>
+            <li v-for="(todo,index) in todos">
+                <span>{{todo.text}}</span>
+                <button v-on:click="removeTodod(index)">删除</button>
+            </li>
+        </ul>
+    </div>
+    <script>
+        var app=new Vue({
+            el: '#app',
+            data: {
+                newTodo:'hello',
+                todos: [
+                    {text:'add some todos'}
+                ]
+            },
+            methods:{
+                addTodo: function () {
+                    var text=this.newTodo.trim();
+                    if(text){
+                        //向数组中添加一个元素
+                        this.todos.push({text:text})
+                    }
+                },
+                removeTodod:function(index){
+                    //删除数组指定位置的一个元素
+                    this.todos.splice(index,1);
+                }
+            }
+
+        });
+    </script>
+</body>
+</html>
