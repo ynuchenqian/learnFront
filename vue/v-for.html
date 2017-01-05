@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app-3">
+        <div v-for="(todo,index) of todos">
+            <span>{{todo.text}}:{{index}}</span>
+        </div>
+    </div>
+    <script>
+        var app=new Vue({
+            el: '#app-3',
+            data: {
+                todos: [
+                    { text: 'Learn JavaScript' },
+                    { text: 'Learn Vue' },
+                    { text: 'Build something awesome' }
+                ]
+
+            }
+
+        });
+    </script>
+</body>
+</html>
