@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!--这是一个vue组件的例子,将数据从父作用域传到子作用域，通过props接口
+实现与父亲元素很好的解耦-->
+</head>
+<body>
+<div id="app">
+    <!--利用v-bind指令将todo传到每一个重复的组件中-->
+    <ol>
+        <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
+    </ol>
+</div>
+<script>
+    Vue.component('todo-item', {
+        props:['todo'],
+        template: '<li>{{todo.text}}</li>'
+    })
+    /*必须加上new Vue，否则的话组件不能被解析，这是什么原因呢？？*/
+    var app = new Vue({
+        el: '#app',
+        data: {
+            groceryList:[
+                { text:'蔬菜'},
+                {text:'奶酪' },
+                {text:'水果'}
+            ]
+        }
+    })
+</script>
+</body>
+</html>
