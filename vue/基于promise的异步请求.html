@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <p>
+            输入一个答案是yes or no的问题：
+            <input type="text" v-model="question"/>
+        </p>
+
+    </div>
+    <script>
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                question:'',
+                answer:'请输入带有?的问题'
+            },
+            //使用watch属性
+            watch:{
+                //如果question发生变化时
+                question:function(newQuestion){
+                    this.answer='已经输入请等待'
+                    this.getAnswer()
+                }
+            },
+            methods:{
+                getAnswer:function(){
+
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>
