@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+</head>
+<body>
+
+    <div id="app">
+        姓：<input type="text" v-model="firstName"/>名：<input type="text" v-model="lastName"/>
+        <span> 姓名:{{fullName}}</span>
+        <span> 姓名1:{{fullName1}}</span><br/>
+        <input type="text" v-model="fullName1"/><br/>
+    </div>
+    <script>
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                firstName:'chen',
+                lastName:'qian',
+                fullName:'chen qian'
+            },
+            //使用watch属性时，代码是重复的
+            watch:{
+                firstName:function(value){
+                   this.fullName=value+' '+this.lastName;
+                },
+                lastName: function (value) {
+                    this.fullName=this.firstName+' '+value
+                }
+            },
+            //使用计算属性时，只需要下面的代码就可以，避免了重复
+           /* computed:{
+                fullName1:function(){
+                    return this.firstName+' '+this.lastName
+                }
+            }*/
+            computed:{
+                fullName1:{
+                    //getter
+                    get:function(){
+                        return this.firstName+' '+this.lastName
+                    },
+                    //setter
+                    set:function(newValues){
+                        var varNames=newValues.split(' ')
+                        this.firstName=varNames[0]
+                        this.lastName=varNames[varNames.length-1]
+                    }
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>
