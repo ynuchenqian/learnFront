@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+</head>
+<body>
+<!--<div id="example">
+    {{ message.split('').reverse().join('') }}
+</div>
+在这种情况下，模板不再简单和清晰。在实现反向显示 message 之前，你应该确认它。这个问题在你不止一次反向显示 message 的时候变得更加糟糕。
+这就是为什么任何复杂逻辑，你都应当使用计算属性。-->
+    <div id="app">
+        <input type="text" v-model="message"/><br/>
+        <span> 原始消息是:{{message}}</span><br/>
+        <span>计算属性得到的新的消息是:{{reservedMessage}}</span><br/>
+        <span>使用方法得到计算属性得到的新的消息是:{{reservedMessage1()}}</span>
+    </div>
+    <script>
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                message:'hello'
+            },
+            methods:{
+                /*使用方法可以达到和计算属性同样的效果*/
+                reservedMessage1:function(){
+                    return this.message.split('').reverse().join('')
+                }
+            },
+            /*计算属性*/
+            computed:{
+                reservedMessage: function () {
+                   return this.message.split('').reverse().join('');
+                }
+            }
+
+           /* 总结：计算属性是基于依赖缓存的，当计算属性需要一个巨大的数组遍历或者
+                大量计算的时候，当属性没有变时，直接从缓存里面取，不需要计算;
+                方法调用时候属性没变也会重新计算一次，效率低
+                */
+        })
+    </script>
+</body>
+</html>
