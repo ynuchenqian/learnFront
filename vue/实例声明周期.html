@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="a"/><br/>
+        <span v-once>a的值不会一直改变：{{a}}</span><br/>
+        <span>a的值为:{{a}}</span>
+        <div v-html="html"></div>
+    </div>
+    <script>
+        var data={a:1};
+        data.html='<button v-el:button v-on:click="click">click me</button>';
+        var vm=new Vue({
+            el:'#app',
+            /*选项*/
+            data:data,
+            /*created这个钩子在实例被创建之后调用*/
+            created:function(){
+                console.info(this.a);
+            }
+        });
+
+        vm.a='陈迁';
+
+    </script>
+</body>
+</html>
