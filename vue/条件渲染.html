@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <h1 v-if="ok">ok</h1>
+        <h1 v-if="!no">no</h1>
+        <!--<template> 元素当做包装元素，并在上面使用 v-if，最终的渲染结果不会包含它-->
+        <template v-if="ok">
+            <h1>标题</h1>
+            <p>段落1</p>
+            <p>段落2</p>
+        </template>
+        <div v-if="Math.random()>0.5">
+            sorry
+        </div>
+        <div v-else>no sorry</div>
+
+        <div v-if="type === 'A'">
+            A
+        </div>
+        <div v-else-if="type === 'B'">
+            B
+        </div>
+        <div v-else-if="type === 'C'">
+            C
+        </div>
+        <div v-else>
+            Not A/B/C
+        </div>
+    </div>
+    <script>
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                ok:true,
+                no:false,
+                ok:true,
+                type:'D'
+            }
+        })
+    </script>
+</body>
+</html>
