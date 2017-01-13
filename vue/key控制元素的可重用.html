@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+
+        <!--<template> 元素当做包装元素，并在上面使用 v-if，最终的渲染结果不会包含它-->
+        <template v-if="loginType==='username'">
+            <label>用户名：</label>
+            <input type="text" placeholder="输入用户名" key="username-input"/>
+        </template>
+        <template v-else>
+            <label>邮件：</label>
+            <input type="text" placeholder="输入邮件" key="email-input"/>
+        </template>
+        <button @click="toggleLoginType()">切换登录类型</button>
+    </div>
+    <script>
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                loginType:'username'
+            },
+            methods:{
+                toggleLoginType:function(){
+                   return this.loginType=this.loginType==='username'?'email':'username'
+                }
+            }
+        })
+    </script>
+</body>
+</html>
