@@ -11,6 +11,12 @@
         <div v-for="(todo,index) of todos">
             <span>{{todo.text}}:{{index}}</span>
         </div>
+        <div v-for="(key,value,index) in objects">
+            {{value}}{{key}}{{index}}
+        </div>
+        <div v-for="n in 10">
+            <span>{{n}}</span>
+        </div>
     </div>
     <script>
         var app=new Vue({
@@ -20,7 +26,12 @@
                     { text: 'Learn JavaScript' },
                     { text: 'Learn Vue' },
                     { text: 'Build something awesome' }
-                ]
+                ],
+                objects:{
+                    FirstName: 'John',
+                    LastName: 'Doe',
+                    Age: 30
+                }
 
             }
 
