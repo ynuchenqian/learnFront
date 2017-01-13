@@ -14,7 +14,7 @@
             输入一个答案是yes or no的问题：
             <input type="text" v-model="question"/>
         </p>
-
+        <p>{{answer}}</p>
     </div>
     <script>
         var vm=new Vue({
@@ -32,11 +32,26 @@
                 }
             },
             methods:{
-                getAnswer:function(){
-
-                }
+                getAnswer:_.debounce(
+                        function () {
+                            var vm = this
+                            if (this.question.indexOf('?') === -1) {
+                                vm.answer = '请输入带有?的问题'
+                                return
+                            }
+                            vm.answer = 'Thinking...'
+                            axios.get('https://yesno.wtf/api')
+                                    .then(function (response) {
+                                        vm.answer = _.capitalize(response.data.answer)
+                                    })
+                                    .catch(function (error) {
+                                        vm.answer = 'Error! Could not reach the API. ' + error
+                                    })
+                        },
+                        // 这是我们为用户停止输入等待的毫秒数
+                        5000
+                )
             }
-
         })
     </script>
 </body>
