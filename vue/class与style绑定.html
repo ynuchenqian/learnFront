@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <!--可以给v-bind:class传给一个对象，动态的切换class-->
+    <div id="app">
+        <div class="static" v-bind:class="{ active: isActive, 'text-danger': hasError }">
+            hello world
+        </div>
+        <!--你也可以直接绑定数据里的一个对象-->
+        <div v-bind:class="classobject">
+            classObject
+        </div>
+        <!--返回绑定对象的计算属性，这是一个常用且强大的模式-->
+        <div v-bind:class="calProp">绑定对象的计算属性</div>
+        <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">绑定内联样式</div>
+    </div>
+    <script>
+        var app=new Vue({
+            el: '#app',
+            data: {
+                isActive:true,
+                hasError:false,
+                classobject:{
+                    isActive:true,
+                    hasError:true
+                },
+                activeColor: 'red',
+                fontSize: 30
+
+
+            },
+            /*计算属性*/
+            computed: {
+                calProp: function () {
+                    return {
+                        active: this.isActive
+                    }
+                }
+            }
+
+        });
+    </script>
+</body>
+</html>
