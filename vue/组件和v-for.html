@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app-3">
+        <input type="text" v-model="newTodoText" v-on:keyup.enter="addNewTodo" placeholder="Add a todo"/>
+        <ul>
+            <li is="todo-item" v-for="(todo,index) in todos" v-bind:title="todo" v-on:remove="todos.splice(index,1)"></li>
+        </ul>
+    </div>
+    <script>
+        Vue.component('todo-item',{
+            template:'\<li>\{{title}}<button v-on:click="$emit(\'remove\')">删除</button>\</li>',
+            props:['title']
+        })
+        var app=new Vue({
+            el: '#app-3',
+            data: {
+                todos: [
+                 'Learn JavaScript' ,
+                 'Learn Vue',
+                 'Build something awesome'
+                ],
+                newTodoText:''
+            },
+            methods:{
+                addNewTodo:function(){
+                    this.todos.push(this.newTodoText),
+                    this.newTodoText=''
+                }
+            }
+
+        });
+    </script>
+</body>
+</html>
